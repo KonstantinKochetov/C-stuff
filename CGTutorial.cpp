@@ -277,9 +277,9 @@ int main(void)
         #endif // UEBUNG6
 
 #ifdef UEBUNG7
-			GLuint neueBuffer;
-			glGenBuffers(1, &neueBuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, neueBuffer);
+			GLuint uvBuffer;
+			glGenBuffers(1, &uvBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
 			glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
@@ -331,6 +331,12 @@ int main(void)
 	#endif
 #endif
 
+#ifdef UEBUNG8
+		glm::mat4 Save = Model;
+		Model = glm::translate(Model, glm::vec3(1.5, 0, 0));
+#endif // UEBUNG8
+
+
 #ifdef UEBUNG5
 		Model = glm::scale(Model, glm::vec3(1.0 / 1000, 1.0 / 1000, 1.0 / 1000));
 #endif
@@ -379,7 +385,7 @@ int main(void)
 #endif // UEBUNG6
 
 #ifdef UEBUNG7
-	glDeleteBuffers(1, &neueBuffer);
+	glDeleteBuffers(1, &uvBuffer);
 #endif // UEBUNG7
 
 
