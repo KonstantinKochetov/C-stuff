@@ -180,6 +180,24 @@ void sendMVP()
 	#include "texture.hpp";
 #endif // UEBUNG7
 
+#ifdef UEBUNG9
+void drawCS() {
+	glm::mat4  Save = Model;
+	Model = glm::scale(Save, glm::vec3(2.0, 0.01, 0.01));
+	sendMVP();
+	drawWireCube();
+
+	Model = glm::scale(Save, glm::vec3(0.01, 2.0, 0.01));
+	sendMVP();
+	drawWireCube();
+
+	Model = glm::scale(Save, glm::vec3(0.01, 0.01, 2.0));
+	sendMVP();
+	drawWireCube();
+}
+ #endif // UEBUNG9
+
+
 
 int main(void)
 {
@@ -377,6 +395,11 @@ int main(void)
 		sendMVP();
 		drawSphere(10, 10);
 #endif // UEBUNG8
+
+#ifdef UEBUNG9
+		drawCS();
+#endif // UEBUNG9
+
 
 
 		// Swap buffers
