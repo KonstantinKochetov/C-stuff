@@ -370,6 +370,15 @@ int main(void)
 
 		drawWireCube();	// gezeigt
 
+#ifdef UEBUNG8
+		Model = Save;
+		Model = glm::scale(Model, glm::vec3(0.5, 0.5, 0.5));
+
+		sendMVP();
+		drawSphere(10, 10);
+#endif // UEBUNG8
+
+
 		// Swap buffers
 		glfwSwapBuffers(window);
 
