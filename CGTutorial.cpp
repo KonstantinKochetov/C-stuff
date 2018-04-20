@@ -176,6 +176,11 @@ void sendMVP()
 	#include "objloader.hpp"
 #endif
 
+#ifdef UEBUNG7
+	#include "texture.hpp";
+#endif // UEBUNG7
+
+
 int main(void)
 {
 	// Initialise GLFW. initialize opengl fenster
@@ -271,6 +276,18 @@ int main(void)
         	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
         #endif // UEBUNG6
 
+#ifdef UEBUNG7
+			GLuint neueBuffer;
+			glGenBuffers(1, &neueBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, neueBuffer);
+			glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+			GLuint Texture = loadBMP_custom("mandrill.bmp");
+#endif // UEBUNG7
+
+
 #endif //  UEBUNG5
 
 
@@ -324,6 +341,14 @@ int main(void)
 		glm::vec3 lightPos = glm::vec3(4, 4, - 4);
 		glUniform3f(glGetUniformLocation(programID, "LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
 #endif
+
+#ifdef UEBUNG7
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Texture);
+
+		glUniform1i(glGetUniformLocation(programID, "myTextureSampler"), 0);
+#endif // UEBUNG7
+
 #ifdef UEBUNG5
 		glBindVertexArray(VertexArrayIDTeapot);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
@@ -352,6 +377,11 @@ int main(void)
 #ifdef UEBUNG6
 	glDeleteBuffers(1, &normalBuffer);
 #endif // UEBUNG6
+
+#ifdef UEBUNG7
+	glDeleteBuffers(1, &neueBuffer);
+#endif // UEBUNG7
+
 
 	glDeleteProgram(programID);
 
