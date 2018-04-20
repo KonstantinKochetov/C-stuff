@@ -2,5 +2,5 @@
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(1755,5): warning : The referenced project 'C:/Users/tj/Documents/OpenGL-tutorial_Binaries/external/GLFW_276.vcxproj' does not exist.
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(1755,5): warning : The referenced project 'C:/Users/tj/Documents/OpenGL-tutorial_Binaries/ZERO_CHECK.vcxproj' does not exist.
   CGTutorial.cpp
-  CGTutorial.vcxproj -> Z:\KGrafik\CGTutorial-master\Debug\CGTutorial.exe
+  CGTutorial.vcxproj -> C:\Users\s0559121\Desktop\CGTutorial-master\Debug\CGTutorial.exe
   CGTutorial.vcxproj -> Debug/CGTutorial.pdb (Full PDB)

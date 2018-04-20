@@ -163,12 +163,18 @@ void sendMVP()
 	// Send our transformation to the currently bound shader, 
 	// in the "MVP" uniform, konstant fuer alle Eckpunkte
 	glUniformMatrix4fv(glGetUniformLocation(programID, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+
+#ifdef UEBUNG6
+	glUniformMatrix4fv(glGetUniformLocation(programID, "M"), 1, GL_FALSE, &Model[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(programID, "V"), 1, GL_FALSE, &View[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(programID, "P"), 1, GL_FALSE, &Projection[0][0]);
+#endif // UEBUNG6
+
 }
 
 #ifdef UEBUNG5
 	#include "objloader.hpp"
 #endif
-
 
 int main(void)
 {
@@ -220,8 +226,12 @@ int main(void)
 	glDepthFunc(GL_LESS);
 #endif
 
+#ifdef UEBUNG6
+	programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+#else // 
 	// Create and compile our GLSL program from the shaders
 	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
+#endif
 
 	// Shader auch benutzen !
 	glUseProgram(programID);
@@ -251,7 +261,20 @@ int main(void)
 		GL_FALSE,//nicht wichtig: normalisierung
 		0,
 		(void*)0); //undefinierte typ von Pointer. Pointer kann beliebiger typ ahnemen
+
+        #ifdef UEBUNG6
+        	GLuint normalBuffer;
+        	glGenBuffers(1, &normalBuffer);// buffer
+        	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
+        	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
+        	glEnableVertexAttribArray(2);
+        	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        #endif // UEBUNG6
+
 #endif //  UEBUNG5
+
+
+
 
 
 	// Eventloop. Endloss schleife (weil Jedes Frame weil Fenster offnen ist)
@@ -297,6 +320,10 @@ int main(void)
 
 		sendMVP();
 
+#ifdef UEBUNG6
+		glm::vec3 lightPos = glm::vec3(4, 4, - 4);
+		glUniform3f(glGetUniformLocation(programID, "LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
+#endif
 #ifdef UEBUNG5
 		glBindVertexArray(VertexArrayIDTeapot);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
@@ -322,6 +349,9 @@ int main(void)
 #ifdef UEBUNG5
 	glDeleteBuffers(1, &vertexBuffer);
 #endif
+#ifdef UEBUNG6
+	glDeleteBuffers(1, &normalBuffer);
+#endif // UEBUNG6
 
 	glDeleteProgram(programID);
 
