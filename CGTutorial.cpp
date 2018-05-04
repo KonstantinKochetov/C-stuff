@@ -126,6 +126,14 @@ void error_callback(int error, const char* description)
 	#endif
 #endif
 
+#ifdef UEBUNG13
+	float angle0 = 0.0;
+	float angle1 = 0.0;
+	float angle2 = 0.0;
+	float angle3 = 0.0;
+#endif // UEBUNG13
+
+
 // when we press the button (Escape) -> close
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -134,6 +142,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	case GLFW_KEY_ESCAPE:
 		glfwSetWindowShouldClose(window, GL_TRUE);
 		break;
+#ifdef UEBUNG2
+#ifdef UEBUNG3
 	case GLFW_KEY_X:
 		angle_x += 5;
 		break;
@@ -143,10 +153,34 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	case GLFW_KEY_Z:
 		angle_z += 5;
 		break;
+
+#endif // UEBUNG2
+#endif // UEBUNG3
+
+#ifdef UEBUNG13
+	case GLFW_KEY_A:
+		angle0 += 5;
+		break;
+	case GLFW_KEY_B:
+		angle1 += 5;
+		break;
+	case GLFW_KEY_C:
+		angle2 += 5;
+		break;
+	case GLFW_KEY_D:
+		angle3 += 5;
+		break;
+
+
+#endif // UEBUNG13
+
 	default:
 		break;
-	}
 }
+}
+
+
+
 
 
 // Diese Drei Matrizen global (Singleton-Muster), damit sie jederzeit modifiziert und
@@ -406,7 +440,29 @@ int main(void)
 		Model = Save;
 		Model = glm::scale(Model, glm::vec3(0.5, 0.5, 0.5));
 #ifdef UEBUNG11
+
+#ifdef UEBUNG13
+		Model = glm::rotate(Model, angle0, glm::vec3(0.0, 1.0, 0.0));
+		Model = glm::rotate(Model, angle1, glm::vec3(0.0, 0.0, 1.0));
+#endif // UEBUNG13
 		drawSeg(1.0);
+#ifdef UEBUNG12
+		Model = glm::translate(Model, glm::vec3(0, 1.0, 0)); // Translate auf die Spitze vom letzten Objekt
+
+#ifdef UEBUNG13
+		Model = glm::rotate(Model, angle2, glm::vec3(0.0, 0.0, 1.0));
+#endif // UEBUNG13
+		drawSeg(0.8);// Zeiche das Objekt
+		Model = glm::translate(Model, glm::vec3(0, 0.8, 0)); // Translate auf die Spitze vom letzten Objekt
+
+#ifdef UEBUNG13
+		Model = glm::rotate(Model, angle3, glm::vec3(0.0, 0.0, 1.0));
+#endif // UEBUNG13
+		drawSeg(0.6);// Zeiche das Objekt
+
+		Model = Save;
+#endif // UEBUNG12
+
 #else
 		sendMVP();
 		drawSphere(10, 10);
