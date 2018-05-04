@@ -358,6 +358,9 @@ int main(void)
 
 
 
+#ifdef UEBUNG14
+			glm::mat4 lightTrf(1.0f);
+#endif // UEBUNG14
 
 
 	// Eventloop. Endloss schleife (weil Jedes Frame weil Fenster offnen ist)
@@ -410,7 +413,14 @@ int main(void)
 		sendMVP();
 
 #ifdef UEBUNG6
-		glm::vec3 lightPos = glm::vec3(4, 4, - 4);
+
+#ifdef UEBUNG14
+		glm::vec4 lightPos = lightTrf * glm::vec4(0, 0, 0, 1);
+#else
+		glm::vec3 lightPos = glm::vec3(4, 4, -4);
+#endif // UEBUNG14
+
+		
 		glUniform3f(glGetUniformLocation(programID, "LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
 #endif
 
@@ -459,6 +469,10 @@ int main(void)
 		Model = glm::rotate(Model, angle3, glm::vec3(0.0, 0.0, 1.0));
 #endif // UEBUNG13
 		drawSeg(0.6);// Zeiche das Objekt
+
+#ifdef UEBUNG14
+		lightTrf = glm::translate(Model, glm::vec3(0, 0.6, 0));
+#endif // UEBUNG14
 
 		Model = Save;
 #endif // UEBUNG12

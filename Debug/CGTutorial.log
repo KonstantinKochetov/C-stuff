@@ -3,7 +3,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(1755,5): warning : The referenced project 'C:/Users/tj/Documents/OpenGL-tutorial_Binaries/ZERO_CHECK.vcxproj' does not exist.
   CGTutorial.cpp
 CGTutorial.cpp(214): warning C4067: Unerwartete Token nach Präprozessordirektive - Zeilenvorschub erwartet.
-CGTutorial.cpp(455): warning C4305: "Argument": Verkürzung von "double" in "float"
-CGTutorial.cpp(461): warning C4305: "Argument": Verkürzung von "double" in "float"
+CGTutorial.cpp(465): warning C4305: "Argument": Verkürzung von "double" in "float"
+CGTutorial.cpp(471): warning C4305: "Argument": Verkürzung von "double" in "float"
   CGTutorial.vcxproj -> C:\Users\s0559121\Desktop\CGTutorial-master\Debug\CGTutorial.exe
   CGTutorial.vcxproj -> Debug/CGTutorial.pdb (Full PDB)
