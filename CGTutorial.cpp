@@ -187,6 +187,7 @@ void drawCS() {
 	sendMVP();
 	drawWireCube();
 
+	// UEBUNG10
 	Model = glm::scale(Save, glm::vec3(0.01, 2.0, 0.01));
 	sendMVP();
 	drawWireCube();
@@ -196,6 +197,19 @@ void drawCS() {
 	drawWireCube();
 }
  #endif // UEBUNG9
+
+#ifdef UEBUNG11
+void drawSeg(float height)
+{
+	glm::mat4 Save = Model;
+	Model = glm::translate(Model, glm::vec3(0, height / 2, 0));
+	Model = glm::scale(Model, glm::vec3(height / 6, height / 2, height / 6));
+	sendMVP(); //zu GrafikKarte
+	drawSphere(10, 10);
+	Model = Save;
+}
+#endif // UEBUNG11
+
 
 
 
@@ -391,9 +405,16 @@ int main(void)
 #ifdef UEBUNG8
 		Model = Save;
 		Model = glm::scale(Model, glm::vec3(0.5, 0.5, 0.5));
-
+#ifdef UEBUNG11
+		drawSeg(1.0);
+#else
 		sendMVP();
 		drawSphere(10, 10);
+
+#endif // UEBUNG11
+
+
+
 #endif // UEBUNG8
 
 #ifdef UEBUNG9
